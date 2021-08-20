@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useState } from 'react'
-import { Table } from '../../component/Table'
+import { TableData } from '../../component/TableData'
 import Loader from 'react-loader-spinner'
 import './index.scss'
 import { repoURL, getRequestParameters } from './constants'
@@ -44,7 +44,7 @@ export const LandingPage = () => {
       Array.isArray(pullReqList) &&
       pullReqList.length > 0 ? (
           <div>
-            <Table pullRequests={pullReqList} />
+            <TableData pullRequests={pullReqList} />
           </div>
         ) : (
           failed && (
