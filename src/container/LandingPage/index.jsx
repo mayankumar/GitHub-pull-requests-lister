@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Loader from 'react-loader-spinner'
 import './index.scss'
@@ -7,7 +7,6 @@ import Table from '../../component/Table'
 import { Waypoint } from 'react-waypoint'
 
 export const LandingPage = () => {
-
   const [pageNum, setPageNum] = useState(1)
   const [prevPageNum, setPrevPageNum] = useState(null)
   const [pullReqList, setPullReqList] = useState([])
@@ -16,37 +15,41 @@ export const LandingPage = () => {
   const [infLoader, setInfLoader] = useState(false)
 
   const getPullrequestList = () => {
-    const reqParams = getRequestParameters(pageNum)
+    const reqParams = getRequestParameters()
+    const apiURL = `${repoURL}?page=${pageNum}`
     axios
-      .get(repoURL, reqParams)
+      .get(apiURL, reqParams)
       .then((response) => {
         if (response.status === 200) {
-          setPullReqList(prev => [...prev, ...response.data])
+          setPullReqList((prev) => [...prev, ...response.data])
           setLoading(false)
           setInfLoader(false)
-        }
+        } else throw new Error('Failed')
       })
-      .catch(error => setFailed(error))
+      .catch((error) => {
+        setFailed(error)
+        setLoading(false)
+        setInfLoader(false)
+      })
   }
-  useLayoutEffect(() => {
+  useEffect(() => {
     fetchData()
   }, [])
 
   const fetchData = () => {
     if (!prevPageNum || prevPageNum !== pageNum) {
-      if (pageNum > 1) 
-        setInfLoader(true)
+      if (pageNum > 1) setInfLoader(true)
       getPullrequestList()
       setPrevPageNum(pageNum)
-      setPageNum(prev => prev + 1)
+      setPageNum((prev) => prev + 1)
     }
   }
 
   return (
     <div className="container">
       {loading && !infLoader && (
-        <div className="spinner height-100vh">
-          <Loader type={'Puff'} height={200} width={200} />
+        <div className="spinner height-60vh">
+          <Loader type={'Puff'} height={100} width={100} color="#232F90" />
         </div>
       )}
       {!(loading || failed) &&

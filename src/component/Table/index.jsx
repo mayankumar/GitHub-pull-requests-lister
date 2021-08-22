@@ -17,7 +17,7 @@ export const Table = (props) => {
       </table>
       {infiniteLoader && (
         <div className="spinner">
-          <Loader type="ThreeDots" height={16} width={200} />
+          <Loader type="ThreeDots" height={16} width={200} color="#232F90" />
         </div>
       )}
     </>
