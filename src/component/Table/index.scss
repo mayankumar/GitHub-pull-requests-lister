@@ -1,0 +1,52 @@
+
+.table {
+  width: 100%;
+  border-spacing: 0px;
+  border-collapse: collapse;
+  border: 2px solid black;
+  font-family: 'Times New Roman';
+
+  &-header {
+    font-size: 13px;
+    font-weight: bold;  
+    text-align: center;
+    background-color: #2F4F4F;
+    color: #FFFAF0;
+    padding: 8px;
+    height: 24px;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    text-transform: uppercase;
+  }
+
+  &-body-row {
+    max-width: 160px;
+    font-size: 11px;
+    text-align: left;
+    padding: 6px;
+    word-break: normal;
+    word-wrap: break-word;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+  }
+
+  &-row {
+    background-color: #E0FFFF;
+  }
+  
+  &-row:nth-child(even) {
+    background-color: #FFFFE0;
+  }
+}
+
+.text-transform-uppercase {
+  text-transform: uppercase;
+}
+
+.text-transform-capitalize {
+  text-transform: capitalize;
+}
+
+.text-align-center {
+  text-align: center;
+}
