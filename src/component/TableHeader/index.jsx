@@ -1,19 +1,26 @@
 import * as React from 'react'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import TableCell from '@material-ui/core/TableCell'
+import '../Table/index.scss'
 
 export const TableHeader = () => {
-
-  const headersList = ['Title', 'Base Branch', 'Author Branch', 'Author', 'Created On', 'Reviewers', 'Labels']
+  const headersList = [
+    'Title',
+    'Base Branch',
+    'Author Branch',
+    'Author',
+    'Created On',
+    'Reviewers',
+    'Labels',
+  ]
   return (
-    <TableHead>
-      <TableRow>
-        {
-          headersList.map(header => <TableCell key={header}>{header}</TableCell>)
-        }
-      </TableRow>
-    </TableHead>
+    <thead>
+      <tr className="table-header-row">
+        {headersList.map((head) => (
+          <th key={head} className="table-header">
+            {head}
+          </th>
+        ))}
+      </tr>
+    </thead>
   )
 }
 

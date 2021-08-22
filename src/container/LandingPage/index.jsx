@@ -1,11 +1,9 @@
-import * as React from 'react'
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useState } from 'react'
-import { TableData } from '../../component/TableData'
 import Loader from 'react-loader-spinner'
 import './index.scss'
 import { repoURL, getRequestParameters } from './constants'
+import Table from '../../component/Table'
 
 export const LandingPage = () => {
 
@@ -20,7 +18,7 @@ export const LandingPage = () => {
       .get(repoURL, reqParams)
       .then((response) => {
         if (response.status === 200) {
-          setPullReqList(response.data)
+          setPullReqList((existing) => [...existing, ...response.data])
           setPageNum(pageNum + 1)
           setLoading(false)
         }
@@ -44,7 +42,7 @@ export const LandingPage = () => {
       Array.isArray(pullReqList) &&
       pullReqList.length > 0 ? (
           <div>
-            <TableData pullRequests={pullReqList} />
+            <Table pullRequests={pullReqList} />
           </div>
         ) : (
           failed && (
