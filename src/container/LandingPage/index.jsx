@@ -1,40 +1,51 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 import axios from 'axios'
 import Loader from 'react-loader-spinner'
 import './index.scss'
 import { repoURL, getRequestParameters } from './constants'
 import Table from '../../component/Table'
+import { Waypoint } from 'react-waypoint'
 
 export const LandingPage = () => {
 
-  const [pageNum, setPageNum] = useState(0)
+  const [pageNum, setPageNum] = useState(1)
+  const [prevPageNum, setPrevPageNum] = useState(null)
   const [pullReqList, setPullReqList] = useState([])
   const [failed, setFailed] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [infLoader, setInfLoader] = useState(false)
 
-  const getPullrequestList = ({ pageNum }) => {
+  const getPullrequestList = () => {
     const reqParams = getRequestParameters(pageNum)
     axios
       .get(repoURL, reqParams)
       .then((response) => {
         if (response.status === 200) {
-          setPullReqList((existing) => [...existing, ...response.data])
-          setPageNum(pageNum + 1)
+          setPullReqList(prev => [...prev, ...response.data])
           setLoading(false)
+          setInfLoader(false)
         }
       })
       .catch(error => setFailed(error))
   }
-  useEffect(() => {
-    getPullrequestList(pageNum)
+  useLayoutEffect(() => {
+    fetchData()
   }, [])
 
-  useEffect(() => console.log(pullReqList), [pullReqList])
+  const fetchData = () => {
+    if (!prevPageNum || prevPageNum !== pageNum) {
+      if (pageNum > 1) 
+        setInfLoader(true)
+      getPullrequestList()
+      setPrevPageNum(pageNum)
+      setPageNum(prev => prev + 1)
+    }
+  }
 
   return (
     <div className="container">
-      {loading && (
-        <div className="spinner">
+      {loading && !infLoader && (
+        <div className="spinner height-100vh">
           <Loader type={'Puff'} height={200} width={200} />
         </div>
       )}
@@ -42,7 +53,7 @@ export const LandingPage = () => {
       Array.isArray(pullReqList) &&
       pullReqList.length > 0 ? (
           <div>
-            <Table pullRequests={pullReqList} />
+            <Table pullRequests={pullReqList} infiniteLoader={infLoader} />
           </div>
         ) : (
           failed && (
@@ -52,6 +63,7 @@ export const LandingPage = () => {
             </div>
           )
         )}
+      <Waypoint onEnter={fetchData} />
     </div>
   )
 }
