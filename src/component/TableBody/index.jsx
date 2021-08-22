@@ -1,10 +1,16 @@
 import * as React from 'react'
+import Labels from '../Labels'
 import '../Table/index.scss'
 
 export const TableBody = (props) => {
   const { data } = props
 
   const handleOnClickRoute = (url) => window.open(url, '_blank')
+
+  const formatDateTime = (dateString) => {
+    let date = new Date(dateString)
+    return `${date.toDateString()} at ${date.getHours()}:${date.getMinutes()}`
+  }
 
   return (
     <tbody>
@@ -18,7 +24,7 @@ export const TableBody = (props) => {
             head: { label: authorBranch },
             requested_reviewers,
             created_at,
-            labels,
+            labels: tags,
             html_url,
           } = row
           return (
@@ -27,22 +33,24 @@ export const TableBody = (props) => {
               onClick={() => handleOnClickRoute(html_url)}
               className="table-row"
             >
-              <td className="table-body-row text-transform-capitalize">
-                {title}
-              </td>
-              <td className="table-body-row text-align-center">{baseBranch}</td>
-              <td className="table-body-row">{authorBranch}</td>
-              <td className="table-body-row text-align-center text-transform-uppercase">
+              <td className="text-transform-capitalize">{title}</td>
+              <td className="text-align-center">{baseBranch}</td>
+              <td>{authorBranch}</td>
+              <td className="text-transform-uppercase">
                 {author}
               </td>
-              <td className="table-body-row">{created_at}</td>
-              <td className="table-body-row text-align-center text-transform-uppercase">
+              <td className="text-align-center">{formatDateTime(created_at)}</td>
+              <td className="text-align-center text-transform-uppercase">
                 {requested_reviewers
                   .map((reviewer) => reviewer.login)
                   .join(', ')}
               </td>
-              <td className="table-body-row text-transform-capitalize">
-                {labels.map((label) => label.name).join(', ')}
+              <td className="text-transform-capitalize">
+                <div className="labels-div">
+                  {Array.isArray(tags) && tags.map((tag) => {
+                    return <Labels label={tag} key={tag.id} />
+                  })}
+                </div>
               </td>
             </tr>
           )

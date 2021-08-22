@@ -13,9 +13,9 @@ export const TableHeader = () => {
   ]
   return (
     <thead>
-      <tr className="table-header-row">
+      <tr>
         {headersList.map((head) => (
-          <th key={head} className="table-header">
+          <th key={head}>
             {head}
           </th>
         ))}
