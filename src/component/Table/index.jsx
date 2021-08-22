@@ -16,7 +16,7 @@ export const Table = (props) => {
         <TableBody data={pullRequests} />
       </table>
       {infiniteLoader && (
-        <div className="spinner">
+        <div className="spinner padding-top-16">
           <Loader type="ThreeDots" height={16} width={200} color="#232F90" />
         </div>
       )}

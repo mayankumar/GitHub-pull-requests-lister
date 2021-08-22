@@ -23,7 +23,7 @@
   background-color: #2F4F4F;
   color: #FFFAF0;
   padding: 8px;
-  height: 24px;
+  height: 32px;
   border-right: 2px solid black;
   border-bottom: 2px solid black;
   text-transform: uppercase;
@@ -50,5 +50,19 @@
 }
 
 .text-align-center {
-  text-align: center;
+  text-align: center !important;
+}
+
+.labels {
+  width: fit-content;
+  border-radius: 2px;
+  padding: 2px;
+  margin: 4px 4px 0 0 ;
+
+  &-div {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
 }

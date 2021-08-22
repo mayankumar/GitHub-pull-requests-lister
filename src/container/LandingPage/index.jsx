@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Loader from 'react-loader-spinner'
 import './index.scss'
-import { repoURL, getRequestParameters, imageURL } from './constants'
+import { repoURL, getRequestParameters, imageURL, titleDesc } from './constants'
 import Table from '../../component/Table'
 import { Waypoint } from 'react-waypoint'
 
@@ -56,6 +56,8 @@ export const LandingPage = () => {
       Array.isArray(pullReqList) &&
       pullReqList.length > 0 ? (
           <div>
+            <div className="title">Neovim: GitHub Pull Requests List</div>
+            <div className="title-desc">{titleDesc}</div>
             <Table pullRequests={pullReqList} infiniteLoader={infLoader} />
           </div>
         ) : (
