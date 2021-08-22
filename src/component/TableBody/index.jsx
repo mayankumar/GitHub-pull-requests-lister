@@ -27,21 +27,21 @@ export const TableBody = (props) => {
               onClick={() => handleOnClickRoute(html_url)}
               className="table-row"
             >
-              <td className="table-body-row text-transform-capitalize">
+              <td className="text-transform-capitalize">
                 {title}
               </td>
-              <td className="table-body-row text-align-center">{baseBranch}</td>
-              <td className="table-body-row">{authorBranch}</td>
-              <td className="table-body-row text-align-center text-transform-uppercase">
+              <td className="text-align-center">{baseBranch}</td>
+              <td>{authorBranch}</td>
+              <td className="text-align-center text-transform-uppercase">
                 {author}
               </td>
-              <td className="table-body-row">{created_at}</td>
-              <td className="table-body-row text-align-center text-transform-uppercase">
+              <td>{created_at}</td>
+              <td className="text-align-center text-transform-uppercase">
                 {requested_reviewers
                   .map((reviewer) => reviewer.login)
                   .join(', ')}
               </td>
-              <td className="table-body-row text-transform-capitalize">
+              <td className="text-transform-capitalize">
                 {labels.map((label) => label.name).join(', ')}
               </td>
             </tr>

@@ -19,3 +19,13 @@
 .height-60vh {
   height: 60vh;
 }
+
+.failed {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: #F33806;
+  padding-top: 1rem;
+  font-family: 'Times New Roman';
+  font-size: 64px;
+}

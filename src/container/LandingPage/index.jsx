@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Loader from 'react-loader-spinner'
 import './index.scss'
-import { repoURL, getRequestParameters } from './constants'
+import { repoURL, getRequestParameters, imageURL } from './constants'
 import Table from '../../component/Table'
 import { Waypoint } from 'react-waypoint'
 
@@ -60,9 +60,9 @@ export const LandingPage = () => {
           </div>
         ) : (
           failed && (
-            <div>
-              <div>Sorry</div>
-              <div>Unable to get data!!</div>
+            <div className="spinner height-60vh">
+              <img src={imageURL} />
+              <div className="failed">Unable to get data!!</div>
             </div>
           )
         )}
