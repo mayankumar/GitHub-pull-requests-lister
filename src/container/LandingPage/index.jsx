@@ -49,7 +49,7 @@ export const LandingPage = () => {
   return (
     <div className="container">
       {loading && !infLoader && (
-        <div className="spinner height-60vh">
+        <div className="spinner height-60vh padding-top-64">
           <Loader type={'Puff'} height={100} width={100} color="#232F90" />
         </div>
       )}
