@@ -25,6 +25,8 @@ export const LandingPage = () => {
           setPullReqList((prev) => [...prev, ...response.data])
           setLoading(false)
           setInfLoader(false)
+          setPrevPageNum(pageNum)
+          setPageNum((prev) => prev + 1)
         } else throw new Error('Failed')
       })
       .catch((error) => {
@@ -41,8 +43,6 @@ export const LandingPage = () => {
     if (!prevPageNum || prevPageNum !== pageNum) {
       if (pageNum > 1) setInfLoader(true)
       getPullrequestList()
-      setPrevPageNum(pageNum)
-      setPageNum((prev) => prev + 1)
     }
   }
 
@@ -53,7 +53,7 @@ export const LandingPage = () => {
           <Loader type={'Puff'} height={100} width={100} color="#232F90" />
         </div>
       )}
-      {!(loading || failed) &&
+      {!loading &&
       Array.isArray(pullReqList) &&
       pullReqList.length > 0 ? (
           <div>
