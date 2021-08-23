@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Loader from 'react-loader-spinner'
 import './index.scss'
-import { repoURL, getRequestParameters, imageURL, titleDesc } from './constants'
+import { repoURL, getRequestParameters, titleDesc } from './constants'
 import Table from '../../component/Table'
 import { Waypoint } from 'react-waypoint'
+import SorryImage from '../../assets/sorryImage.jpg'
 
 export const LandingPage = () => {
   const [pageNum, setPageNum] = useState(1)
@@ -62,8 +63,8 @@ export const LandingPage = () => {
           </div>
         ) : (
           failed && (
-            <div className="spinner height-60vh">
-              <img src={imageURL} />
+            <div className="spinner height-60vh padding-top-64">
+              <img src={SorryImage} />
               <div className="failed">Unable to get data!!</div>
             </div>
           )
