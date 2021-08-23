@@ -5,7 +5,7 @@ import './index.scss'
 import { repoURL, getRequestParameters, titleDesc } from './constants'
 import Table from '../../component/Table'
 import { Waypoint } from 'react-waypoint'
-import SorryImage from '../../assets/sorryImage.jpg'
+import ErrorMessage from '../../component/ErrorMessage'
 
 export const LandingPage = () => {
   const [pageNum, setPageNum] = useState(1)
@@ -63,13 +63,10 @@ export const LandingPage = () => {
           </div>
         ) : (
           failed && (
-            <div className="spinner height-60vh padding-top-64">
-              <img src={SorryImage} />
-              <div className="failed">Unable to get data!!</div>
-            </div>
+            <ErrorMessage />
           )
         )}
-      <Waypoint onEnter={fetchData} />
+      { !loading && <Waypoint onEnter={fetchData} />}
     </div>
   )
 }
